@@ -12,8 +12,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
+  var row;
   List<String> list = List<String>();
+  List<String> meanings = List<String>();
+
   @override
   Widget build(BuildContext context) {
     load();
@@ -26,7 +28,25 @@ class _MyAppState extends State<MyApp> {
           child: PageView.builder(
             itemBuilder: (context, position) {
               return Container(
-
+                child: Center(
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Image(
+                          image:  NetworkImage("https://cdn.vox-cdn.com/thumbor/fNwRmSTE0L-p6SjuaQmsmhfmEb0=/0x0:655x365/1400x1400/filters:focal(249x23:353x127):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/55356659/spider_man_homecoming.0.jpg")
+                        ),
+                        Text(
+                          list[position],
+                          style: TextStyle(color: Colors.black, fontSize: 50.0),
+                        ),
+                        Text(
+                          meanings[position],
+                          style: TextStyle(color: Colors.black, fontSize: 25.0),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               );
             },
             itemCount: list.length,
@@ -36,19 +56,19 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-    Future<void> load() async {
+  Future<void> load() async {
     ByteData data = await rootBundle.load("res/wordlist.xlsx");
     var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     var excel = Excel.decodeBytes(bytes, verify: false);
 
     for (var table in excel.tables.keys) {
       int count = 0;
-      for (var row in excel.tables[table].rows) {
+      for (row in excel.tables[table].rows) {
         count++;
         list.add(row[0]);
+        meanings.add(row[1]);
       }
-      print ("list ${list.length}");
-      print(list);
+      print(meanings);
     }
   }
 }
