@@ -28,6 +28,8 @@ dependencies:
   csv_reader: ^1.0.2
   excel: ^1.0.9
   flutter_svg: ^0.18.0
+  flip_card: ^0.4.4
+
 
 
 

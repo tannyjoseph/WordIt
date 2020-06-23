@@ -11,8 +11,6 @@ Future<void> load(List<String> list, List<String> meanings) async {
       list.add(row[0]);
       meanings.add(row[1]);
     }
-
-    print(list);
-    print(meanings);
   }
 }
+
