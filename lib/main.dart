@@ -1,3 +1,4 @@
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'helper/ExcelLoader.dart';
@@ -18,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   var row;
   List<String> list = List<String>();
   List<String> meanings = List<String>();
+  List<String> images = List<String>();
 
   @override
   void initState() {
@@ -101,13 +103,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ],
                 ),
-                new Container(
-                  color: Colors.orange,
-                  child: Text(
-                    'hey',
-                    style: TextStyle(color: Colors.black, fontSize: 50.0),
-                  ),
-                ),
+                FlashCards(),
                 new Container(
                   color: Colors.lightGreen,
                 ),
@@ -140,14 +136,11 @@ class _MyAppState extends State<MyApp> {
   Widget listCard(int index) {
     return InkWell(
       onTap: () {
-        load(list, meanings);
+        load(list, meanings, images);
 
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                 return Words(word: list, meaning: meanings, index: index);}
-            ));
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Words(word: list, meaning: meanings, index: index, image: images);
+        }));
       },
       child: Card(
         color: getColor(index + 1),
@@ -170,6 +163,26 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
+  // ignore: non_constant_identifier_names
+  PageView FlashCards() {
+    return PageView.builder(
+        itemCount: 3,
+        itemBuilder: (context, position) {
+          return Container(
+            padding: EdgeInsets.all(20.0),
+            child: FlipCard(
+              direction: FlipDirection.VERTICAL,
+              front: Container(
+                  decoration: BoxDecoration(color: Colors.red),
+                  child: Center(child: Text(list[position]))),
+              back: Container(
+                  decoration: BoxDecoration(color: Colors.red),
+                  child: Center(child: Text(meanings[position]))),
+            ),
+          );
+        });
+  }
 }
 
 // ignore: missing_return
@@ -183,14 +196,14 @@ Tab getTab(IconData icon) {
 }
 
 class Words extends StatelessWidget {
-  final List<String> word, meaning;
+  final List<String> word, meaning, image;
   final int index;
 
-  Words({@required this.word, @required this.meaning, @required this.index});
+  Words({@required this.word, @required this.meaning, @required this.index, @required this.image});
 
   @override
   Widget build(BuildContext context) {
-    int m = index*25;
+    int m = index * 25;
     return Scaffold(
       body: PageView.builder(
           itemCount: 25,
@@ -199,12 +212,13 @@ class Words extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
+                    Image.asset('images/word_images/${image[position + m]}'),
                     Text(
-                      word[position+m],
+                      word[position + m],
                       style: TextStyle(color: Colors.black, fontSize: 50.0),
                     ),
                     Text(
-                      meaning[position+m],
+                      meaning[position + m],
                       style: TextStyle(color: Colors.black, fontSize: 25.0),
                     )
                   ],
