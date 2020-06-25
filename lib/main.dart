@@ -25,6 +25,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    load(list, meanings, images);
+
   }
 
   @override
@@ -167,7 +169,7 @@ class _MyAppState extends State<MyApp> {
   // ignore: non_constant_identifier_names
   PageView FlashCards() {
     return PageView.builder(
-        itemCount: 3,
+        itemCount: list.length  ,
         itemBuilder: (context, position) {
           return Container(
             padding: EdgeInsets.all(20.0),
