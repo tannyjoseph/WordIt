@@ -119,7 +119,7 @@ class _MyAppState extends State<MyApp> {
                   color: Colors.red,
                 ),
                 new Container(
-                  color: Colors.purple,
+                  color: Colors.purple[600],
                 )
               ],
             )
