@@ -2,7 +2,7 @@ import 'package:excel/excel.dart';
 import 'package:flutter/services.dart';
 
 Future<void> load(List<String> list, List<String> meanings, List<String> images ) async {
-  ByteData data = await rootBundle.load("res/wordlist.xlsx");
+  ByteData data = await rootBundle.load("res/Book1.xlsx");
   var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
   var excel = Excel.decodeBytes(bytes, verify: false);
   for (var table in excel.tables.keys) {
@@ -10,6 +10,7 @@ Future<void> load(List<String> list, List<String> meanings, List<String> images 
       list.add(row[0]);
       meanings.add(row[1]);
       images.add(row[2]);
+      print(row[2]);
     }
   }
 }

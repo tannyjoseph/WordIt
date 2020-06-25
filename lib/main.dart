@@ -28,9 +28,9 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     load(list, meanings, images);
-    for(var image in images){
-      precacheImage(new AssetImage('images/word_images/$image'), context);
-    }
+//    for(var image in images){
+//      precacheImage(new AssetImage('images/word_images/$image'), context);
+//    }
 
 
   }
@@ -220,12 +220,7 @@ class Words extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    ProgressiveImage(placeholder: AssetImage('images/word_images/${image[position + m]}'),
-                      thumbnail: AssetImage('images/word_images/${image[position + m]}'),
-                      image: AssetImage('images/word_images/${image[position + m]}'),
-                      width: 400.0,
-                      height: 300.0,
-                    ),
+                    Image.asset('images/word_images/${image[position+m]}'),
                     Text(
                       word[position + m],
                       style: TextStyle(color: Colors.black, fontSize: 50.0),
