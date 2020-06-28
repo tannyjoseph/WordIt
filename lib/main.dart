@@ -22,10 +22,10 @@ class _MyAppState extends State<MyApp> {
   List<String> list = List<String>();
   List<String> meanings = List<String>();
   List<String> images = List<String>();
+  QuestionLoader questionLoader = QuestionLoader();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     load(list, meanings, images);
 //    for(var image in images){
@@ -112,9 +112,7 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
                 FlashCards(),
-                new Container(
-                  color: Colors.lightGreen,
-                ),
+                Sentences(),
                 new Container(
                   color: Colors.red,
                 ),
@@ -144,10 +142,11 @@ class _MyAppState extends State<MyApp> {
   Widget listCard(int index) {
     return InkWell(
       onTap: () {
-        load(list, meanings, images);
+        loadFirstScreen(list, meanings, images);
 
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Words(word: list, meaning: meanings, index: index, image: images);
+          return Words(
+              word: list, meaning: meanings, index: index, image: images);
         }));
       },
       child: Card(
@@ -175,7 +174,7 @@ class _MyAppState extends State<MyApp> {
   // ignore: non_constant_identifier_names
   PageView FlashCards() {
     return PageView.builder(
-        itemCount: list.length  ,
+        itemCount: list.length,
         itemBuilder: (context, position) {
           return Container(
             padding: EdgeInsets.all(20.0),
@@ -190,6 +189,22 @@ class _MyAppState extends State<MyApp> {
             ),
           );
         });
+  }
+
+  // ignore: non_constant_identifier_names
+  PageView Sentences() {
+    questionLoader.loadQuiz();
+
+    return PageView.builder(
+      itemCount: questionLoader.q.length,
+      itemBuilder: (context, position) {
+        return Container(
+          child: Text(
+            questionLoader.q[position].question,
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -207,7 +222,11 @@ class Words extends StatelessWidget {
   final List<String> word, meaning, image;
   final int index;
 
-  Words({@required this.word, @required this.meaning, @required this.index, @required this.image});
+  Words(
+      {@required this.word,
+      @required this.meaning,
+      @required this.index,
+      @required this.image});
 
   @override
   Widget build(BuildContext context) {
