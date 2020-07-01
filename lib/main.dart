@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,8 @@ void main() {
   ));
 }
 
+
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -23,16 +26,14 @@ class _MyAppState extends State<MyApp> {
   List<String> meanings = List<String>();
   List<String> images = List<String>();
   QuestionLoader questionLoader = QuestionLoader();
+  var random = new Random();
+  var incAns;
 
   @override
   void initState() {
     super.initState();
-    load(list, meanings, images);
-//    for(var image in images){
-//      precacheImage(new AssetImage('images/word_images/$image'), context);
-//    }
-
-
+    loadFirstScreen(list, meanings, images);
+    questionLoader.loadQuiz();
   }
 
   @override
@@ -192,20 +193,89 @@ class _MyAppState extends State<MyApp> {
   }
 
   // ignore: non_constant_identifier_names
-  PageView Sentences() {
-    questionLoader.loadQuiz();
+  Column Sentences() {
+    List<String> options = questionLoader.getOptions();
+    print(options);
 
-    return PageView.builder(
-      itemCount: questionLoader.q.length,
-      itemBuilder: (context, position) {
-        return Container(
-          child: Text(
-            questionLoader.q[position].question,
-          ),
-        );
-      },
+    return Column(
+
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(questionLoader.getQuestion()),
+        FlatButton(
+          child: Text(options[0]),
+          onPressed: (){
+            checkAns(options[0]);
+          },
+        ),
+        FlatButton(
+          child: Text(options[1]),
+          onPressed: (){
+            checkAns(options[1]);
+          },
+        ),
+        FlatButton(
+          child: Text(options[2]),
+          onPressed: (){
+            checkAns(options[2]);
+          },
+        ),
+        FlatButton(
+          child: Text(options[3]),
+          onPressed: (){
+            checkAns(options[3]);
+          },
+        ),
+      ],
     );
   }
+
+  void checkAns(String chosen) {
+    String correct = questionLoader.getAnswer();
+    if (questionLoader.isFinished()) {
+//      Alert(
+//        context: context,
+//        type: AlertType.error,
+//        title: "Finished!",
+//        desc: "You have reached the end of the quiz.",
+//        buttons: [
+//          DialogButton(
+//            child: Text(
+//              "CANCEL",
+//              style: TextStyle(color: Colors.white, fontSize: 20),
+//            ),
+//            onPressed: () => Navigator.pop(context),
+//            width: 120,
+//          )
+//        ],
+//      ).show();
+
+      questionLoader.reset();
+
+//      score = [];
+    } else {
+      setState(() {
+        if (correct == chosen) {
+//          score.add(Icon(
+//            Icons.check,
+//            color: Colors.green,
+//          ));
+
+        print('correct');
+        } else {
+//          score.add(Icon(
+//            Icons.close,
+//            color: Colors.red,
+//          ));
+
+        print('wrong');
+        }
+        questionLoader.nextQ();
+      });
+    }
+  }
+
 }
 
 // ignore: missing_return
