@@ -4,31 +4,35 @@ import 'package:excel/excel.dart';
 import 'package:flutter/services.dart';
 import 'package:wordit/models/Question.dart';
 
-
 class QuestionLoader {
-  int _qno = 0;
+  int _qIndex;
+  int _qno ;
   var incAns;
   var random = new Random();
+
+  void getQuestionIndex(int index){
+    _qno = (index)*25;
+  }
 
   List<Question> q = List<Question>();
   List<String> options = List<String>();
 
-
   void nextQ() {
-    if (_qno < q.length - 1) {
+    print(_qno);
+    if (_qno < ((_qIndex+1)*25)) {
       _qno++;
     }
   }
 
   bool isFinished() {
-    if (_qno == 12) {
+    if (_qno == ((_qIndex+1)*25)-1) {
       return true;
     }
     return false;
   }
 
   void reset() {
-    if (isFinished()) _qno = 0;
+    if (isFinished()) _qno = (_qIndex)*25;
   }
 
   String getQuestion() {
@@ -50,9 +54,9 @@ class QuestionLoader {
       if (i == loc) {
         options.add(q[_qno].ans);
       } else {
-        incAns = random.nextInt(1325);
+        incAns = random.nextInt(25);
         while (incAns == loc || incAns == _qno) {
-          incAns = random.nextInt(1325);
+          incAns = random.nextInt(25);
         }
         options.add(q[incAns].ans);
       }
@@ -66,11 +70,14 @@ class QuestionLoader {
     return result;
   }
 
+  Future<void> loadQuiz(int index) async {
 
-  Future<void> loadQuiz() async {
+    getQuestionIndex(index);
+    _qIndex = index;
+    print("s $_qno");
     ByteData data = await rootBundle.load("res/wordlist.xlsx");
     var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    var excel = Excel.decodeBytes(bytes, verify: false);
+    var excel = Excel.decodeBytes(bytes);
     for (var table in excel.tables.keys) {
       for (var row in excel.tables[table].rows) {
         q.add(Question(row[3], row[0]));
