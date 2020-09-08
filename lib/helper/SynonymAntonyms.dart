@@ -14,7 +14,6 @@ Future<void> loadsyns() async {
       for (int i = 1; i< a.length; i++){
         b.add(a[i]);
       }
-//      print(b);
     }
   }
 }

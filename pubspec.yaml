@@ -33,6 +33,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   fonts:
+    - family: MyFlutterApp
+      fonts:
+        - asset: svg_fonts/MyFlutterApp.ttf
     - family: Custom
       fonts:
         - asset: svg_fonts/Custom.ttf

@@ -153,7 +153,5 @@ class _SentenceQuizState extends State<SentenceQuiz> {
 }
 Future<String> getScore(String index) async{
   final prefs = await SharedPreferences.getInstance();
-//    final String p = await prefs.get(index);
-//    print("d $p");
   return await prefs.get(index);
 }

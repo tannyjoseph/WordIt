@@ -44,7 +44,7 @@ class QuestionLoader {
   }
 
   List<String> getOptions() {
-    incAns = random.nextInt(1325);
+    incAns = random.nextInt(25);
 
     int loc = random.nextInt(4);
     List<String> options = List<String>();
@@ -63,7 +63,7 @@ class QuestionLoader {
     }
     result = LinkedHashSet<String>.from(options).toList();
     while (result.length != 4) {
-      incAns = random.nextInt(1325);
+      incAns = random.nextInt(25);
       options.add(q[incAns].ans);
       result = LinkedHashSet<String>.from(options).toList();
     }

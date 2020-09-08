@@ -34,11 +34,6 @@ class _SentencesState extends State<Sentences> {
   QuestionLoader questionLoader = QuestionLoader();
 
   @override
-  void initState() {
-    super.initState();
-
-  }
-  @override
   Widget build(BuildContext context) {
 //    score = getScore("0").then((value) => print(value));
 
