@@ -10,6 +10,7 @@ class SentenceQuiz extends StatefulWidget {
   final QuestionLoader question;
   final List<String> list, meanings, images;
   final int index;
+
   SentenceQuiz(
       {@required this.question,
       @required this.list,
@@ -34,10 +35,11 @@ class _SentenceQuizState extends State<SentenceQuiz> {
     loadFirstScreen(list, meaning, images);
 //    ques.loadQuiz();
   }
+
   String p;
+
   @override
   Widget build(BuildContext context) {
-
     List<String> options = ques.getOptions();
 //    print(" j ${widget.index}");
     return Scaffold(
@@ -83,14 +85,14 @@ class _SentenceQuizState extends State<SentenceQuiz> {
     );
   }
 
-  void saveScore(int index, int score) async{
+  void saveScore(int index, int score) async {
     final pref = await SharedPreferences.getInstance();
     await pref.setString(index.toString(), score.toString());
   }
 
-  Future<String> getScore(String index) async{
+  Future<String> getScore(String index) async {
     final prefs = await SharedPreferences.getInstance();
-     p = await prefs.get(index);
+    p = await prefs.get(index);
 //    print("d $p");
     return await prefs.get(index);
   }
@@ -102,8 +104,6 @@ class _SentenceQuizState extends State<SentenceQuiz> {
       if (correct == chosen) score++;
       print('finished');
       saveScore(widget.index, score);
-      Future<String> val = getScore(widget.index.toString());
-//      print(val);
       Alert(
         context: context,
         type: AlertType.error,
@@ -142,8 +142,6 @@ class _SentenceQuizState extends State<SentenceQuiz> {
 //          ));
 
           print('wrong');
-
-
         }
         print("$score");
 
@@ -152,7 +150,8 @@ class _SentenceQuizState extends State<SentenceQuiz> {
     }
   }
 }
-Future<String> getScore(String index) async{
+
+Future<String> getScore(String index) async {
   final prefs = await SharedPreferences.getInstance();
   return await prefs.get(index);
 }
