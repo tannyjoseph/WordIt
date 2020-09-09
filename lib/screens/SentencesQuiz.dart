@@ -91,7 +91,7 @@ class _SentenceQuizState extends State<SentenceQuiz> {
   Future<String> getScore(String index) async{
     final prefs = await SharedPreferences.getInstance();
      p = await prefs.get(index);
-    print("d $p");
+//    print("d $p");
     return await prefs.get(index);
   }
 
@@ -99,17 +99,15 @@ class _SentenceQuizState extends State<SentenceQuiz> {
     String correct = ques.getAnswer();
 
     if (ques.isFinished()) {
+      if (correct == chosen) score++;
       print('finished');
       saveScore(widget.index, score);
       Future<String> val = getScore(widget.index.toString());
-      print(val);
-
+//      print(val);
       Alert(
         context: context,
         type: AlertType.error,
-
         title: "Finished!",
-
         desc: "You have reached the end of the quiz. \n Your Score is : $score",
         buttons: [
           DialogButton(
@@ -131,12 +129,11 @@ class _SentenceQuizState extends State<SentenceQuiz> {
     } else {
       setState(() {
         if (correct == chosen) {
-          score++;
+          score += 1;
 //          score.add(Icon(
 //            Icons.check,
 //            color: Colors.green,
 //));
-
           print('correct');
         } else {
 //          score.add(Icon(
@@ -145,7 +142,11 @@ class _SentenceQuizState extends State<SentenceQuiz> {
 //          ));
 
           print('wrong');
+
+
         }
+        print("$score");
+
         ques.nextQ();
       });
     }

@@ -111,7 +111,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                   FlashCards(word: list, meaning: meanings),
                   Sentences(list: list, meanings: meanings, images: images),
-                  SynonAntonyms(list: list, meanings: meanings, images: images),
+                  SynonAntonyms(),
                 ],
               )),
         ),

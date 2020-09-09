@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wordit/screens/SynAnScreen.dart';
 
 class SynonAntonyms extends StatelessWidget {
-  final List<String> list, meanings, images;
-
-  SynonAntonyms(
-      {@required this.list, @required this.meanings, @required this.images} );
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,8 +18,6 @@ class SynonAntonyms extends StatelessWidget {
   Widget listCard(int index, BuildContext context) {
     return InkWell(
       onTap: () {
-//        loadFirstScreen(list, meanings, images);
-
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return SynAnScreen();
         }));

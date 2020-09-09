@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wordit/helper/SynonymAntonyms.dart';
+import 'package:wordit/helper/SynonymLoader.dart';
 
 class SynAnScreen extends StatefulWidget {
   @override

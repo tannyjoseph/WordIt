@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -53,7 +52,6 @@ class _WordsState extends State<Words> {
             value *= -1;
           }
         } else {
-          //Won't work properly in case initialPage in changed in PageController
           if (position == 0) {
             value = 0;
           } else if (position == 1) {

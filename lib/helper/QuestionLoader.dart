@@ -18,14 +18,14 @@ class QuestionLoader {
   List<String> options = List<String>();
 
   void nextQ() {
-    print(_qno);
+//    print(_qno);
     if (_qno < ((_qIndex+1)*25)) {
       _qno++;
     }
   }
 
   bool isFinished() {
-    if (_qno == ((_qIndex+1)*25)-1) {
+    if (_qno == ((_qIndex+1)*25) - 1) {
       return true;
     }
     return false;
@@ -74,7 +74,7 @@ class QuestionLoader {
 
     getQuestionIndex(index);
     _qIndex = index;
-    print("s $_qno");
+//    print("s $_qno");
     ByteData data = await rootBundle.load("res/wordlist.xlsx");
     var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     var excel = Excel.decodeBytes(bytes);
