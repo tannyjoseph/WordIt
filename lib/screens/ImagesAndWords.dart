@@ -71,23 +71,3 @@ class WordList extends StatelessWidget {
     if (index % 2 == 1) return Color(0xFFFF686B);
   }
 }
-
-//child: Card(
-//color: getColor(index + 1),
-//shape: RoundedRectangleBorder(
-//borderRadius: BorderRadius.circular(15.0),
-//),
-//elevation: 5,
-//child: Align(
-//alignment: Alignment.center,
-//child: Padding(
-//padding: const EdgeInsets.all(16.0),
-//child: Text(
-//'Word List #${index + 1}',
-//style: TextStyle(
-//fontSize: 20.0,
-//fontWeight: FontWeight.bold,
-//),
-//),
-//)),
-//),

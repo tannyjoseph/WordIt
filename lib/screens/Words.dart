@@ -18,21 +18,22 @@ class Words extends StatefulWidget {
 
 class _WordsState extends State<Words> {
   final _pageController = PageController(
-    viewportFraction: 0.3,
+    viewportFraction: 0.5,
   );
+
   @override
   Widget build(BuildContext context) {
     int m = widget.index * 25;
     return Scaffold(
         body: PageView.builder(
-          controller: _pageController,
-          scrollDirection: Axis.vertical,
-          itemCount: 25,
-          itemBuilder: (context, position) => _builder(position, m),
-        ));
+      controller: _pageController,
+      scrollDirection: Axis.vertical,
+      itemCount: 25,
+      itemBuilder: (context, position) => _builder(position, m),
+    ));
   }
 
-  _builder(int position, int m){
+  _builder(int position, int m) {
     return AnimatedBuilder(
       animation: _pageController,
       builder: (context, child) {
@@ -45,9 +46,8 @@ class _WordsState extends State<Words> {
             double _lowerLimit = 0;
             double _upperLimit = pi / 2;
 
-            value =
-                (_upperLimit - (value.abs() * (_upperLimit - _lowerLimit)))
-                    .clamp(_lowerLimit, _upperLimit);
+            value = (_upperLimit - (value.abs() * (_upperLimit - _lowerLimit)))
+                .clamp(_lowerLimit, _upperLimit);
             value = _upperLimit - value;
             value *= -1;
           }
@@ -58,33 +58,43 @@ class _WordsState extends State<Words> {
             value = -1;
           }
         }
-
+        print(widget.image[position+m]);
         return Transform(
+
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.001)
             ..rotateX(value),
           alignment: Alignment.center,
           child: Container(
-            color: Colors.redAccent,
-            child: Column(
-              children: [
-//                    FadeInImage(
-//                      placeholder: MemoryImage(kTransparentImage),
-//                      image: AssetImage("images/words_bg.png"),
-//                    ),
-                Center(
-                  child: Text(
-                    widget.word[position + m],
-                    style: TextStyle(color: Colors.black, fontSize: 50.0),
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            child: Card(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: FadeInImage(
+                      placeholder: MemoryImage(kTransparentImage),
+                      image: AssetImage("images/word_images/${widget.image[position+m]}"),
+                    ),
                   ),
-                ),
-                Center(
-                  child: Text(
-                    widget.meaning[position + m],
-                    style: TextStyle(color: Colors.black, fontSize: 25.0),
+                  SizedBox(width: 10.0),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.word[position + m],
+                          style: TextStyle(color: Colors.black, fontSize: 30.0),
+                        ),
+                        Text(
+                          widget.meaning[position + m],
+                          style: TextStyle(color: Colors.black, fontSize: 20.0),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
