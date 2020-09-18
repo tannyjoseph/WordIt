@@ -42,7 +42,9 @@ class WordList extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    loadFirstScreen(list, meanings, images);
+//                    print(index);
+                    loadFirstScreen(list, meanings, images, index);
+                    print(list);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return Words(

@@ -74,8 +74,7 @@ class QuestionLoader {
 
     getQuestionIndex(index);
     _qIndex = index;
-//    print("s $_qno");
-    ByteData data = await rootBundle.load("res/wordlist.xlsx");
+    ByteData data = await rootBundle.load("res/wordlist$index.xlsx");
     var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     var excel = Excel.decodeBytes(bytes);
     for (var table in excel.tables.keys) {

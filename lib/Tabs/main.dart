@@ -32,16 +32,12 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    loadFirstScreen(list, meanings, images);
+//    loadFirstScreen(list, meanings, images);
 //    questionLoader.loadQuiz();
   }
 
   @override
   Widget build(BuildContext context) {
-//    print(list.length);
-//    print("p ${list.length}");
-
-
     return MaterialApp(
       home: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(

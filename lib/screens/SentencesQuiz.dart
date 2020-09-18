@@ -32,7 +32,7 @@ class _SentenceQuizState extends State<SentenceQuiz> {
     meaning = widget.meanings;
     images = widget.images;
 
-    loadFirstScreen(list, meaning, images);
+//    loadFirstScreen(list, meaning, images);
 //    ques.loadQuiz();
   }
 

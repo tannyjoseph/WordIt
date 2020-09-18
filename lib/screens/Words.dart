@@ -58,9 +58,7 @@ class _WordsState extends State<Words> {
             value = -1;
           }
         }
-        print(widget.image[position+m]);
         return Transform(
-
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.001)
             ..rotateX(value),
@@ -73,7 +71,7 @@ class _WordsState extends State<Words> {
                   Expanded(
                     child: FadeInImage(
                       placeholder: MemoryImage(kTransparentImage),
-                      image: AssetImage("images/word_images/${widget.image[position+m]}"),
+                      image: AssetImage("images/word_images/${widget.image[position]}"),
                     ),
                   ),
                   SizedBox(width: 10.0),
@@ -83,11 +81,11 @@ class _WordsState extends State<Words> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          widget.word[position + m],
+                          widget.word[position],
                           style: TextStyle(color: Colors.black, fontSize: 30.0),
                         ),
                         Text(
-                          widget.meaning[position + m],
+                          widget.meaning[position],
                           style: TextStyle(color: Colors.black, fontSize: 20.0),
                         ),
                       ],

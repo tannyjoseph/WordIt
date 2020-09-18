@@ -54,7 +54,7 @@ class _SentencesState extends State<Sentences> {
 //    print(score[0]);
     return InkWell(
       onTap: () {
-        loadFirstScreen(widget.list, widget.meanings, widget.images);
+        loadFirstScreen(widget.list, widget.meanings, widget.images, index);
         questionLoader.loadQuiz(index);
 
         Navigator.push(context, MaterialPageRoute(builder: (context) {
